@@ -89,9 +89,10 @@ commander
   })
 
 commander
-  .command('lint [paths...]')
+  .command('lint')
   .description('Lint JavaScript [& CSS coming soon!]')
-  .action(function () {
+  .option('--ignore <pattern>', 'Patterns to ignore while linting')
+  .action(function (options) {
     const engine = require('standard-engine')
     const standard = require('standard')
     // get lint out of there
@@ -101,7 +102,8 @@ commander
     engine.cli(Object.assign({}, standard, {
       cwd: process.cwd(),
       eslintConfig: {
-        parser: 'babel-eslint'
+        parser: 'babel-eslint',
+        ignore: options.ignore
       },
       homepage: 'https://github.com/conveyal/mastarm'
     }))
