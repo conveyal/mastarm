@@ -116,6 +116,11 @@ Lint using [Standard](http://standardjs.com/). Everything is passed directly to 
 
 ```shell
 $ mastarm lint
+
+ Options:
+
+  -h, --help          output usage information
+  --ignore <pattern>  Patterns to ignore while linting
 ```
 
 You can optionally pass in a directory (or directories) using the glob pattern. Be sure to quote paths containing glob patterns so that they are expanded by standard instead of your shell:
