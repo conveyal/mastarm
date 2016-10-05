@@ -68,7 +68,7 @@ $ mastarm --help
 Compile JS, HTML, CSS, YAML, Markdown into a single `.js`. Utilizes [babel](https://babeljs.io/), [browserify](https://github.com/substack/node-browserify), [budo](https://github.com/mattdesl/budo), and [postcss](http://postcss.org/).
 
 ```shell
-$ mastarm build [entries...] [options]
+$ mastarm build [options] [entries...]
 
   Options:
 
@@ -98,7 +98,7 @@ Build, push to S3, and invalidate CloudFront in one command.
 ```shell
 $ mastarm deploy --help
 
-Usage: deploy [entries...] [options]
+Usage: deploy [options] [entries...]
 
 Bundle & Deploy JavaScript & CSS
 
@@ -115,7 +115,7 @@ Options:
 Lint using [Standard](http://standardjs.com/). Everything is passed directly to [`standard-engine`](https://github.com/Flet/standard-engine).
 
 ```shell
-$ mastarm lint
+$ mastarm lint [paths...]
 ```
 
 You can optionally pass in a directory (or directories) using the glob pattern. Be sure to quote paths containing glob patterns so that they are expanded by standard instead of your shell:
@@ -128,21 +128,23 @@ Note: by default standard will look for all files matching the patterns: `"**/*.
 
 ### `test`
 
-Run the [Jest](http://facebook.github.io/jest/) test runner on your project.  It is expected that you create tests within your project.  By default, mastarm will run Jest and generate coverage reports on all .js files in the `lib` folder of your project.
+Run the [Jest](http://facebook.github.io/jest/) test runner on your project.  It is expected that you create tests within your project.  By default, mastarm will run Jest and generate coverage reports on all .js files in the `lib` folder of your project.  The `patterns` argument will make Jest run only tests whose filename match the provided pattern.
 
 ```shell
 $ mastarm test
 
-Usage: test [options]
+Usage: test [options] [patterns...]
 
 Run tests using Jest
 
 Options:
 
-  -h, --help              output usage information
-  -u, --update-snapshots  Force update of snapshots.  USE WITH CAUTION.
-  --coverage              Run Jest with coverage reporting
-  --no-cache              Run Jest without cache
+  -h, --help                output usage information
+  -u, --update-snapshots    Force update of snapshots.  USE WITH CAUTION.
+  --coverage                Run Jest with coverage reporting
+  --no-cache                Run Jest with cache
+  --coverage-paths <paths>  Extra paths to collect code coverage from
+  --setup-files <paths>     Setup files to run before each test
 
 ```
 

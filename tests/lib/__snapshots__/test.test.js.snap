@@ -3,6 +3,9 @@ Array [
   "-u",
   "--no-cache",
   "--config",
+  "these",
+  "files",
+  "only",
 ]
 `;
 
@@ -16,6 +19,9 @@ Object {
     "another-folder",
   ],
   "coverageDirectory": "coverage",
+  "setupFiles": Array [
+    "beforeTestsSetup.js",
+  ],
 }
 `;
 

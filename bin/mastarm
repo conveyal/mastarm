@@ -155,19 +155,20 @@ commander
   })
 
 commander
-  .command('test')
+  .command('test [patterns...]')
   .description('Run tests using Jest')
   .option('-u, --update-snapshots', 'Force update of snapshots.  USE WITH CAUTION.')
   .option('--coverage', 'Run Jest with coverage reporting')
   .option('--no-cache', 'Run Jest with cache')
-  .option('--coverage-paths <paths>')
-  .action(function (options) {
+  .option('--coverage-paths <paths>', 'Extra paths to collect code coverage from')
+  .option('--setup-files <paths>', 'Setup files to run before each test')
+  .action(function (patterns, options) {
     checkDependencies()
     const jest = require('jest')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const testUtils = require('../lib/test')
     testUtils.setupTestEnvironment(config)
-    jest.run(testUtils.generateTestConfig(options))
+    jest.run(testUtils.generateTestConfig(patterns, options))
   })
 
 commander.parse(process.argv)
