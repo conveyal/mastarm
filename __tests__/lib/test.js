@@ -18,9 +18,4 @@ describe('test.js', () => {
     delete jestCfg.scriptPreprocessor
     expect(jestCfg).toMatchSnapshot()
   })
-
-  it('setupTestEnvironment should set MESSAGES environment variable if needed', () => {
-    testUtils.setupTestEnvironment({ messages: { hi: 'there' } })
-    expect(process.env.MESSAGES).toMatchSnapshot()
-  })
 })

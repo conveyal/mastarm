@@ -1,0 +1,9 @@
+exports[`load-config should work without any config files present 1`] = `
+Object {
+  "env": Object {},
+  "environment": "test",
+  "messages": Object {},
+  "settings": Object {},
+  "store": Object {},
+}
+`;

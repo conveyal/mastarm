@@ -28,5 +28,3 @@ Object {
   ],
 }
 `;
-
-exports[`test.js setupTestEnvironment should set MESSAGES environment variable if needed 1`] = `"{\"hi\":\"there\"}"`;

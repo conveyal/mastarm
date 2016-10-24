@@ -155,8 +155,9 @@ commander
     checkDependencies()
     const jest = require('jest')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
+    const get = util.makeGetFn([options, commander, config.settings])
     const testUtils = require('../lib/test')
-    testUtils.setupTestEnvironment(config)
+    util.configureEnvironment({config, env: get('env')})
     jest.run(testUtils.generateTestConfig(patterns, options))
   })
 
