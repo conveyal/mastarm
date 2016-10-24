@@ -33,7 +33,7 @@
   "homepage": "https://github.com/conveyal/mastarm",
   "dependencies": {
     "auth0-js": "^7.2.1",
-    "auth0-lock": "^10.4.0",
+    "auth0-lock": "^10.5.0",
     "aws-sdk": "^2.4.2",
     "babel-core": "^6.10.4",
     "babel-eslint": "^7.0.0",
