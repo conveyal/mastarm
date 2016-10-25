@@ -10,7 +10,7 @@
     "mastarm": "bin/mastarm"
   },
   "scripts": {
-    "cover": "bin/mastarm test --skip-check-dependencies --coverage --coverage-paths bin",
+    "cover": "bin/mastarm lint --skip-check-dependencies && bin/mastarm test --skip-check-dependencies --coverage --coverage-paths bin",
     "prepublish": "rm -rf react && bin/mastarm prepublish --skip-check-dependencies lib/react && mv build/lib/react react && rm -rf build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "bin/mastarm lint && bin/mastarm test"
