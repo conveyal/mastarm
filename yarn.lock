@@ -1144,16 +1144,6 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bower-config@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/bower-config/-/bower-config-1.4.0.tgz#16c38c1135f8071c19f25938d61b0d8cbf18d3f1"
-  dependencies:
-    graceful-fs "^4.1.3"
-    mout "^1.0.0"
-    optimist "^0.6.1"
-    osenv "^0.1.3"
-    untildify "^2.1.0"
-
 brace-expansion@^1.0.0:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.6.tgz#7197d7eaa9b87e648390ea61fc66c84427420df9"
@@ -1464,17 +1454,6 @@ chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3, chalk@1.1.3:
     has-ansi "^2.0.0"
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
-
-check-dependencies@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/check-dependencies/-/check-dependencies-1.0.1.tgz#9e7f15822de20621ec6b9ffaabac4d588c3811b0"
-  dependencies:
-    bower-config "^1.4.0"
-    chalk "^1.1.3"
-    findup-sync "^0.4.2"
-    lodash.camelcase "^4.3.0"
-    minimist "^1.2.0"
-    semver "^5.3.0"
 
 chokidar@^1.0.0, chokidar@^1.0.1, chokidar@^1.6.0:
   version "1.6.0"
@@ -3927,10 +3906,6 @@ lodash.assignwith@^4.0.7:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.assignwith/-/lodash.assignwith-4.2.0.tgz#127a97f02adc41751a954d24b0de17e100e038eb"
 
-lodash.camelcase@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
-
 lodash.clonedeep@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-3.0.2.tgz#a0a1e40d82a5ea89ff5b147b8444ed63d92827db"
@@ -4258,10 +4233,6 @@ mold-source-map@~0.4.0:
   dependencies:
     convert-source-map "^1.1.0"
     through "~2.2.7"
-
-mout@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/mout/-/mout-1.0.0.tgz#9bdf1d4af57d66d47cb353a6335a3281098e1501"
 
 ms@0.7.0:
   version "0.7.0"
@@ -5656,7 +5627,7 @@ semver@^4.3.3, "semver@2 || 3 || 4":
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/semver/-/semver-4.3.6.tgz#300bc6e0e86374f7ba61068b5b1ecd57fc6532da"
 
-semver@^5.0.1, semver@^5.0.3, semver@^5.1.0, semver@^5.3.0, semver@~5.3.0, "semver@2 >=2.2.1 || 3.x || 4 || 5", "semver@2 || 3 || 4 || 5":
+semver@^5.0.1, semver@^5.0.3, semver@^5.1.0, semver@~5.3.0, "semver@2 >=2.2.1 || 3.x || 4 || 5", "semver@2 || 3 || 4 || 5":
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
@@ -6318,12 +6289,6 @@ uniq@^1.0.1:
 unpipe@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
-
-untildify@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/untildify/-/untildify-2.1.0.tgz#17eb2807987f76952e9c0485fc311d06a826a2e0"
-  dependencies:
-    os-homedir "^1.0.0"
 
 url-trim@^1.0.0:
   version "1.0.0"

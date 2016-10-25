@@ -11,7 +11,7 @@ commander
   .option('-c, --config <path>', 'Path to configuration files.', path.join(process.cwd(), '/configurations/default'))
   .option('-e, --env <environment>', 'Environment to use.', process.env.NODE_ENV || 'development')
   .option('-m, --minify', 'Minify built files.')
-  .option('-S, --skip-check-dependencies', 'Skip checking and installing out of date package.json dependencies.')
+  .option('-S, --skip-check-dependencies', '**DEPRECATED**')
 
 commander
   .command('build [entries...]')
@@ -21,7 +21,6 @@ commander
   .option('-s, --serve', 'Serve with budo. Auto-matically rebuilds on changes.')
   .option('-w, --watch', 'Automatically rebuild on changes.')
   .action(function (entries, options) {
-    checkDependencies()
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
     const files = util.parseEntries(entries, get)
@@ -70,7 +69,6 @@ commander
   .option('--cloudfront', 'CloudFront Distribution ID to invalidate.')
   .option('--s3bucket', 'S3 Bucket to push to.')
   .action(function (entries, options) {
-    checkDependencies()
     const pushToS3 = require('../lib/push-to-s3')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
@@ -108,7 +106,6 @@ commander
   .command('prepublish [entries...]')
   .description('Transpile JavaScript down to ES5 with Babel')
   .action(function (entries, options) {
-    checkDependencies()
     const babel = require('babel-core')
     const fs = require('fs')
     const glob = require('glob')
@@ -152,7 +149,6 @@ commander
   .option('--setup-files <paths>', 'Setup files to run before each test')
   .option('--test-path-ignore-patterns <patterns>', 'File patterns to ignore when scanning for test files')
   .action(function (patterns, options) {
-    checkDependencies()
     const jest = require('jest')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const testUtils = require('../lib/test')
@@ -161,16 +157,3 @@ commander
   })
 
 commander.parse(process.argv)
-
-function checkDependencies () {
-  if (!commander.skipCheckDependencies) {
-    const results = util.updateDependencies()
-    if (results.status !== 0) {
-      console.error(results.error)
-      process.exit(results.status)
-    } else if (!results.depsWereOk) {
-      console.log('Updated out of date dependencies found in package.json. Please try running the command again.')
-      process.exit(results.status)
-    }
-  }
-}

@@ -1,7 +1,5 @@
 /* globals describe, expect, it, jest */
 
-const mockSyncFn = jest.fn(() => { return { status: 0, depsWereOk: true } })
-jest.mock('check-dependencies', () => { return { sync: mockSyncFn } })
 jest.mock('../../lib/pkg', () => { return {} })
 
 const util = require('../../lib/util')
@@ -39,12 +37,5 @@ describe('util.js', () => {
     expect(argv1).toContain('mastarm')
     util.popMastarmFromArgv()
     expect(process.argv[1]).not.toBe(argv1)
-  })
-
-  it('updateDependencies should run check-dependencies package', () => {
-    const results = util.updateDependencies()
-    expect(mockSyncFn).toBeCalled()
-    expect(results.status).toBe(0)
-    expect(results).toMatchSnapshot()
   })
 })

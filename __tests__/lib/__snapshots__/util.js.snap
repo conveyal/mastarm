@@ -14,10 +14,3 @@ Array [
 `;
 
 exports[`util.js parseEntries should try to find default file paths 1`] = `Array []`;
-
-exports[`util.js updateDependencies should run check-dependencies package 1`] = `
-Object {
-  "depsWereOk": true,
-  "status": 0,
-}
-`;
