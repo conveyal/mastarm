@@ -11,8 +11,8 @@
   },
   "scripts": {
     "cover": "bin/mastarm test --coverage --coverage-paths bin",
-    "prepublish": "rm -rf react && bin/mastarm prepublish lib/react && mv build/lib/react react && rm -rf build",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "build": "rm -rf react && bin/mastarm prepublish lib/react && mv build/lib/react react && rm -rf build",
+    "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post",
     "test": "bin/mastarm standard && bin/mastarm test"
   },
   "repository": {
