@@ -9,7 +9,7 @@ const util = require('../lib/util')
 commander
   .version(require('../package.json').version)
   .option('-c, --config <path>', 'Path to configuration files.', path.join(process.cwd(), '/configurations/default'))
-  .option('-e, --env <environment>', 'Environment to use.', process.env.NODE_ENV || 'development')
+  .option('-e, --env <environment>', 'Environment to use.')
   .option('-m, --minify', 'Minify built files.')
   .option('-S, --skip-check-dependencies', '**DEPRECATED**')
 
