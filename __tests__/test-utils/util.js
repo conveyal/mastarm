@@ -1,11 +1,4 @@
-const rimraf = require('rimraf')
+const path = require('path')
 
-const mockDir = '__tests__/test-utils/mocks'
-
-exports.mockDir = mockDir
-
-exports.makeCleanBuiltFilesFn = (filePattern) => {
-  return (done) => {
-    rimraf(`${mockDir}/${filePattern}*`, done)
-  }
-}
+exports.mockDir = path.resolve(__dirname, 'mocks')
+exports.buildDir = path.resolve(__dirname, 'tmp')

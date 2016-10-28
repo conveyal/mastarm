@@ -77,13 +77,18 @@ commander
       console.log('No file(s) found!  Did you spell the filename correctly?')
       process.exit(1)
     }
-    files.map(pushToS3({
+    Promise.all(files.map(pushToS3({
       cloudfront: get('cloudfront'),
       config,
       env: get('env'),
       minify: get('minify'),
       s3bucket: get('s3bucket')
-    }))
+    }))).then(() => {
+      console.log('Finished pushing to s3')
+    }).catch((err) => {
+      console.error(err.stack)
+      process.exit(1)
+    })
   })
 
 commander

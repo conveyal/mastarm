@@ -1,32 +1,66 @@
-/* globals afterEach, beforeEach, describe, it, expect */
-const fs = require('fs')
-
+/* globals afterEach, beforeEach, describe, it, expect, jasmine */
 const build = require('../../lib/build')
-
 const util = require('../test-utils/util.js')
 
+const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+
 describe('build', () => {
-  const buildFilePattern = 'built-build'
-  const cleanFn = util.makeCleanBuiltFilesFn(buildFilePattern)
   const mockDir = util.mockDir
 
-  beforeEach(cleanFn)
-  afterEach(cleanFn)
+  beforeEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
+  })
+  afterEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
+  })
 
-  it('should transform js and css', (done) => {
-    build({
-      config: {},
-      files: [
-        [`${mockDir}/mockComponent.js`, `${mockDir}/${buildFilePattern}.js`],
-        [`${mockDir}/mock.css`, `${mockDir}/${buildFilePattern}.css`]
-      ]
+  describe('development', () => {
+    it('should transform js', (done) => {
+      const results = build({
+        config: {},
+        files: [[`${mockDir}/index.js`]]
+      })
+
+      results[0]
+        .then((buf) => {
+          expect(buf.toString()).toMatchSnapshot()
+          done()
+        })
+        .catch(done)
     })
 
-    // css transform happens asynchronously, so wait 1 second before checking for file
-    setTimeout(() => {
-      expect(fs.existsSync(`${mockDir}/${buildFilePattern}.js`)).toBeTruthy()
-      expect(fs.existsSync(`${mockDir}/${buildFilePattern}.css`)).toBeTruthy()
-      done()
-    }, 1000)
+    it('should transform css', (done) => {
+      const results = build({
+        config: {},
+        files: [[`${mockDir}/index.css`]]
+      })
+
+      results[0]
+        .then((results) => {
+          expect(results.css).toMatchSnapshot()
+          done()
+        })
+        .catch(done)
+    })
+  })
+
+  describe('production', () => {
+    it('should transform and minify js', (done) => {
+      const results = build({
+        config: {},
+        env: 'production',
+        files: [
+          [`${mockDir}/index.js`],
+          [`${mockDir}/index.css`]
+        ],
+        minify: true
+      })
+
+      Promise.all(results).then((output) => {
+        expect(output[0].toString()).toMatchSnapshot()
+        expect(output[1].css).toMatchSnapshot()
+        done()
+      }).catch(done)
+    })
   })
 })

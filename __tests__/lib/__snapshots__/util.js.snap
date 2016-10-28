@@ -1,13 +1,11 @@
-exports[`util.js parseEntries should not find any paths if no matches 1`] = `Array []`;
-
 exports[`util.js parseEntries should return inputted file paths 1`] = `
 Array [
   Array [
-    "__tests__/test-utils/mocks/mock.css",
-    "assets/__tests__/test-utils/mocks/mock.css",
+    "/Users/trevorgerhardt/conveyal/mastarm/__tests__/test-utils/mocks/index.css",
+    "blah",
   ],
   Array [
-    "__tests__/test-utils/mocks/mockComponent.js",
+    "/Users/trevorgerhardt/conveyal/mastarm/__tests__/test-utils/mocks/index.js",
     "blah",
   ],
 ]
