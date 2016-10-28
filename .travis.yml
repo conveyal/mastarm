@@ -8,14 +8,14 @@ notifications:
 node_js:
   - '6'
 before_install:
-  - npm i -g codecov npm@^3 yarn
+  - npm i -g codecov yarn
 install:
   - yarn
 script:
-  - npm run cover
+  - yarn run cover
   - codecov
 after_success:
-  - npm run semantic-release
+  - yarn run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
