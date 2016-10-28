@@ -10,7 +10,7 @@ const util = require('../test-utils/util.js')
 
 const mastarm = path.resolve(__dirname, '../../bin/mastarm')
 
-describe.skip('mastarm cli', () => {
+describe('mastarm cli', () => {
   it('should display usage with no args', (done) => {
     exec(`node ${mastarm} --help`, (err, stdout, stderr) => {
       expect(err).toBeNull()

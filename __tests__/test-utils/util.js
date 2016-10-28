@@ -1,4 +1,2 @@
-const path = require('path')
-
-exports.mockDir = path.resolve(__dirname, 'mocks')
-exports.buildDir = path.resolve(__dirname, 'tmp')
+exports.mockDir = '__tests__/test-utils/mocks'
+exports.buildDir = '__tests__/test-utils/tmp'

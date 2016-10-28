@@ -1,11 +1,11 @@
 exports[`util.js parseEntries should return inputted file paths 1`] = `
 Array [
   Array [
-    "/Users/trevorgerhardt/conveyal/mastarm/__tests__/test-utils/mocks/index.css",
+    "__tests__/test-utils/mocks/index.css",
     "blah",
   ],
   Array [
-    "/Users/trevorgerhardt/conveyal/mastarm/__tests__/test-utils/mocks/index.js",
+    "__tests__/test-utils/mocks/index.js",
     "blah",
   ],
 ]
