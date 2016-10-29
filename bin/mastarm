@@ -28,23 +28,21 @@ commander
       console.log('No entry point found!  Did you spell the filename correctly?')
       process.exit(1)
     }
+    const opts = {
+      config,
+      env: get('env'),
+      files,
+      flyle: get('flyle'),
+      minify: get('minify'),
+      proxy: get('proxy'),
+      watch: get('watch')
+    }
     if (get('serve')) {
       const budo = require('../lib/budo')
-      budo({
-        config,
-        files,
-        flyle: get('flyle'),
-        proxy: get('proxy')
-      })
+      budo(opts)
     } else {
       const build = require('../lib/build')
-      build({
-        config,
-        env: get('env'),
-        files,
-        minify: get('minify'),
-        watch: get('watch')
-      })
+      build(opts)
     }
   })
 
@@ -85,6 +83,7 @@ commander
       s3bucket: get('s3bucket')
     }))).then(() => {
       console.log('Finished pushing to s3')
+      process.exit(0)
     }).catch((err) => {
       console.error(err.stack)
       process.exit(1)
