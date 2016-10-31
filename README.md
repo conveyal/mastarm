@@ -81,8 +81,7 @@ $ mastarm --help
     -m, --minify                   Minify built files.
     -p, --proxy <address>          Proxy calls through to target address.
     -s, --serve                    Serve with budo. Auto-matically rebuilds on changes.
-    -S, --skip-check-dependencies  Skip checking and installing out of date package.json dependencies.
-    -u, --update-snapshots         Force update of jest snapshots.  USE WITH CAUTION.
+    -u, --update-snapshots         Force update of jest snapshots. USE WITH CAUTION.
     -w, --watch                    Rebuild on changes with watchify.
 ```
 
@@ -161,7 +160,7 @@ Run tests using Jest
 Options:
 
   -h, --help                              output usage information
-  -u, --update-snapshots                  Force update of snapshots.  USE WITH CAUTION.
+  -u, --update-snapshots                  Force update of snapshots. USE WITH CAUTION.
   --coverage                              Run Jest with coverage reporting
   --no-cache                              Run Jest without cache (defaults to using cache)
   --coverage-paths <paths>                Extra paths to collect code coverage from
