@@ -3,8 +3,8 @@
   "description": "Conveyal JavaScript development toolbelt.",
   "main": "bin/mastarm",
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": "6",
+    "npm": "3"
   },
   "bin": {
     "mastarm": "bin/mastarm"
@@ -78,7 +78,6 @@
     "redux": "^3.6.0",
     "redux-actions": "^0.12.0",
     "redux-logger": "^2.7.0",
-    "redux-promise": "^0.5.3",
     "standard": "^8.3.0",
     "standard-engine": "^5.0.0",
     "through2": "^2.0.1",
