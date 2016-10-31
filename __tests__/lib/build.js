@@ -1,4 +1,5 @@
 /* globals afterEach, beforeEach, describe, it, expect, jasmine */
+
 const build = require('../../lib/build')
 const util = require('../test-utils/util.js')
 
@@ -29,23 +30,20 @@ describe('build', () => {
         .catch(done)
     })
 
-    it('should transform css', (done) => {
+    it('should transform css', async () => {
       const results = build({
         config: {},
         files: [[`${mockDir}/index.css`]]
       })
 
-      results[0]
-        .then((results) => {
-          expect(results.css).toMatchSnapshot()
-          done()
-        })
-        .catch(done)
+      const result = await results[0]
+      const css = result.css
+      expect(css.indexOf('criticalClass')).toBeGreaterThan(-1)
     })
   })
 
   describe('production', () => {
-    it('should transform and minify js', (done) => {
+    it('should transform and minify js', async () => {
       const results = build({
         config: {},
         env: 'production',
@@ -56,11 +54,10 @@ describe('build', () => {
         minify: true
       })
 
-      Promise.all(results).then((output) => {
-        expect(output[0].toString().indexOf('MockTestComponentUniqueName')).to.not.equal(-1)
-        expect(output[1].css).toMatchSnapshot()
-        done()
-      }).catch(done)
+      const output = await Promise.all(results)
+
+      expect(output[0].toString().indexOf('MockTestComponentUniqueName')).not.toBe(-1)
+      expect(output[1].css.indexOf('criticalClass')).not.toBe(-1)
     })
   })
 })
