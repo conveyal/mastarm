@@ -43,12 +43,12 @@ This file should contain string messages to be used throughout the application. 
 Settings contain both Mastarm configuration settings and per environment settings to be used in the application and are usually duplicates of what can be passed from the command line. Current Mastarm settings are:
 
 * `cloudfront` - String - CloudFront distribution id that will automatically invalidate file paths after they are deployed to S3
-* `entries` — Array - input:output JavaScript & CSS file pairs
-* `env` — String - environment override
-* `environments` - Object - override top level settings [example](https://github.com/conveyal/modeify/blob/master/configurations/example/settings.yml#L40).
-* `flyle` — Boolean - serve map tiles from a local cache for working offline
-* `s3bucket` — String - bucket to deploy to
-* `serve` - Boolean - serve client side files via budo
+* `entries` {Array} input:output JavaScript & CSS file pairs
+* `env` {String} environment override
+* `environments` {Object} override top level settings (see [example](https://github.com/conveyal/modeify/blob/master/configurations/example/settings.yml#L40))
+* `flyle` {Boolean} serve map tiles from a local cache for working offline
+* `s3bucket` {String} bucket to deploy to
+* `serve` {Boolean} serve client side files via budo
 
 ### `store.yml`
 
