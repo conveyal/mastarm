@@ -38,14 +38,20 @@ describe('util.js', () => {
       expect(result).toMatchSnapshot()
     })
 
-    it('should throw error if the entry does not exist', () => {
-      expect(() => util.parseEntries(['fileDoesNotExist:blah'], get)).toThrow()
-    })
-
     it('should return inputted file paths', () => {
       const result = util.parseEntries([`${mockDir}/index.css:blah`, `${mockDir}/index.js:blah`], get)
       expect(result.length).toBe(2)
       expect(result).toMatchSnapshot()
+    })
+  })
+
+  describe('assertEntriesExist', () => {
+    it('should not throw an error if entries exist', () => {
+      util.assertEntriesExist([[`${mockDir}/index.js`]])
+    })
+
+    it('should throw error if the entry does not exist', () => {
+      expect(() => util.assertEntriesExist([['fileDoesNotExist']])).toThrow()
     })
   })
 
