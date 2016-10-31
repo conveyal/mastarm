@@ -17,11 +17,10 @@
   * [Deploy](#deploy)
   * [Lint](#lint)
   * [Test](#test)
-* [React Utils](#react-utils)
 
 ## Install
 
-With [node v6+ and npm 3+ installed](https://nodejs.org/en/download/current/):
+With [node v6 and npm 3 installed](https://nodejs.org/en/download/current/):
 
 ```shell
 $ npm install -g mastarm
@@ -29,19 +28,31 @@ $ npm install -g mastarm
 
 ## Configuration
 
-Mastarm commands can be pointed to a directory containing configuration files using the `--config` flag. By default, Mastarm will look in the `configurations/default` path of the current working directory. Mastarm currently looks for four different files: `env.yml`, `settings.yml`, `store.yml`, and `messages.yml`.
+Mastarm can be pointed to a directory containing configuration files using the `--config` flag. By default, Mastarm looks in the `configurations/default` path of the current working directory. Mastarm looks for four different files: `env.yml`, `settings.yml`, `store.yml`, and `messages.yml`.
 
-#### `env.yml`
+### `env.yml`
 
 This file should contain strings that can be replaced in front-end JavaScript code using [`envify`](https://github.com/hughsk/envify). [Example in Scenario Editor](https://github.com/conveyal/scenario-editor/blob/master/configurations/default/env.yml.tmp).
 
-#### `messages.yml`
+### `messages.yml`
 
-This file should contain string messages to be used throughout the application. It will replace `process.env.MESSAGES` with a string-ified version of the object. Just `JSON.parse` it to have access to all of your messages.
+This file should contain string messages to be used throughout the application. It will replace `process.env.MESSAGES` with a string-ified version of the object. Just `JSON.parse` it on the client to have access to all of your messages.
 
-#### `settings.yml`
+### `settings.yml`
 
-Settings contain both Mastarm configuration settings and per environment settings to be used in the application. To override base settings, create an environments section in the `yml` file. [Example in Modeify](https://github.com/conveyal/modeify/blob/master/configurations/example/settings.yml#L40). Each section below will contain the settings that they can use.
+Settings contain both Mastarm configuration settings and per environment settings to be used in the application and are usually duplicates of what can be passed from the command line. Current Mastarm settings are:
+
+* `cloudfront` - String - CloudFront distribution id that will automatically invalidate file paths after they are deployed to S3
+* `entries` — Array - input:output JavaScript & CSS file pairs
+* `env` — String - environment override
+* `environments` - Object - override top level settings [example](https://github.com/conveyal/modeify/blob/master/configurations/example/settings.yml#L40).
+* `flyle` — Boolean - serve map tiles from a local cache for working offline
+* `s3bucket` — String - bucket to deploy to
+* `serve` - Boolean - serve client side files via budo
+
+### `store.yml`
+
+Auto-populate your redux store with this configuration data instead of setting defaults directly in code.
 
 ## CLI Usage
 
@@ -91,13 +102,11 @@ $ mastarm build [options] [entries...]
     -w, --watch            Automatically rebuild on changes.
 ```
 
-If no entries are provided, mastarm will attempt to find the entry file. It will first see if the `entry` option has been set in the `settings.yml` config file. If that setting or the file does not exist, it will attempt to build the file specified as `main` in your project's `package.json` file. And finally, if both of those options fail, mastarm will attempt to look for the `index.js` and `index.css` file in the current working directory and attempt to compile each into `assets/index.js` and `assets/index.css` respectively.  
-
-If entries are provided, mastarm will build only those files.
+If no entries are provided, mastarm will use the `entries` option from your `settings.yml` config file. If no entries are found, build will not run.
 
 #### CSS Building
 
-Starting with mastarm 1.0.0, CSS builds will occur separately from the browserify build. Thus, any CSS imports into a JavaScript file will cause a build error. Instead, to build CSS file(s), you must specify the file(s) as entries in the command. Also, when running in `serve` or `watch` mode, the CSS files will get automatically rebuilt, but a manual page refresh will be necessary.
+CSS builds occur separately from the browserify build. Any CSS imports into a JavaScript file cause a build error. To build CSS file(s), specify the CSS file(s) as entries in the command. When running in `serve` or `watch` mode, the CSS files get automatically rebuilt, but a manual page refresh is necessary.
 
 ### `commit`
 
@@ -130,7 +139,7 @@ Lint using [Standard](http://standardjs.com/). Everything is passed directly to 
 $ mastarm lint [paths...]
 ```
 
-You can optionally pass in a directory (or directories) using the glob pattern. Be sure to quote paths containing glob patterns so that they are expanded by standard instead of your shell:
+Optionally pass in a directory (or directories) using the glob pattern. Quote paths containing glob patterns so that they are expanded by standard instead of your shell:
 
 ```shell
 $ mastarm lint "src/util/**/*.js" "test/**/*.js"
@@ -140,7 +149,7 @@ Note: by default standard will look for all files matching the patterns: `"**/*.
 
 ### `test`
 
-Run the [Jest](http://facebook.github.io/jest/) test runner on your project.  It is expected that you create tests within your project.  By default, mastarm will run Jest and generate coverage reports on all .js files in the `lib` folder of your project.  The `patterns` argument will make Jest run only tests whose filename match the provided pattern.
+Run the [Jest](http://facebook.github.io/jest/) test runner on your project. By default, mastarm will run Jest and generate coverage reports on all .js files in the `lib` folder of your project. The `patterns` argument will make Jest run only tests whose filename match the provided pattern.
 
 ```shell
 $ mastarm test
@@ -160,10 +169,6 @@ Options:
   --test-path-ignore-patterns <patterns>  File patterns to ignore when scanning for test files
 
 ```
-
-## React Utils
-
-Documentation coming soon
 
 [npm-image]: https://img.shields.io/npm/v/mastarm.svg?maxAge=2592000&style=flat-square
 [npm-url]: https://www.npmjs.com/package/mastarm
