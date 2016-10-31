@@ -23,7 +23,7 @@ describe('build', () => {
 
       results[0]
         .then((buf) => {
-          expect(buf.toString()).toMatchSnapshot()
+          expect(buf.toString().indexOf('MockTestComponentUniqueName')).to.not.equal(-1)
           done()
         })
         .catch(done)
@@ -57,7 +57,7 @@ describe('build', () => {
       })
 
       Promise.all(results).then((output) => {
-        expect(output[0].toString()).toMatchSnapshot()
+        expect(output[0].toString().indexOf('MockTestComponentUniqueName')).to.not.equal(-1)
         expect(output[1].css).toMatchSnapshot()
         done()
       }).catch(done)
