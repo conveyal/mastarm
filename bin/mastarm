@@ -24,10 +24,7 @@ commander
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
     const files = util.parseEntries(entries, get)
-    if (files.length === 0) {
-      console.log('No entry point found!  Did you spell the filename correctly?')
-      process.exit(1)
-    }
+    util.assertEntriesExist(files)
     const opts = {
       config,
       env: get('env'),
@@ -71,10 +68,7 @@ commander
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
     const files = util.parseEntries(entries, get)
-    if (files.length === 0) {
-      console.log('No file(s) found!  Did you spell the filename correctly?')
-      process.exit(1)
-    }
+    util.assertEntriesExist(files)
     Promise.all(files.map(pushToS3({
       cloudfront: get('cloudfront'),
       config,
