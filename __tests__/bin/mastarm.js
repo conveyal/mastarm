@@ -1,4 +1,4 @@
-/* globals afterEach, beforeEach, describe, it, expect */
+/* globals afterEach, beforeEach, describe, it, jasmine, expect */
 
 const exec = require('child_process').exec
 const fs = require('fs')
@@ -10,7 +10,16 @@ const util = require('../test-utils/util.js')
 
 const mastarm = path.resolve(__dirname, '../../bin/mastarm')
 
+const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+
 describe('mastarm cli', () => {
+  beforeEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
+  })
+  afterEach(() => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
+  })
+
   it('should display usage with no args', (done) => {
     exec(`node ${mastarm} --help`, (err, stdout, stderr) => {
       expect(err).toBeNull()

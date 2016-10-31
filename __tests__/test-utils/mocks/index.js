@@ -1,6 +1,6 @@
 import {Component} from 'react'
 
-export default class MockComponent extends Component {
+export default class MockTestComponentUniqueName extends Component {
   static defaultProps = {
     test: 'hi'
   }
