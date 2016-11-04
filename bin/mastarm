@@ -103,6 +103,7 @@ commander
 commander
   .command('prepublish [entries...]')
   .description('Transpile JavaScript down to ES5 with Babel')
+  .option('-O, --outdir <dir>', 'Publish directory')
   .action(function (entries, options) {
     const babel = require('babel-core')
     const fs = require('fs')
@@ -111,16 +112,18 @@ commander
     const babelConfig = require('../lib/babel-config')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
-    const outdir = path.join(process.cwd(), 'build')
-    entries.forEach((entry) => {
-      if (fs.statSync(entry).isDirectory()) {
+    const files = util.parseEntries(entries, get)
+
+    files.forEach((entry) => {
+      if (fs.statSync(entry[0]).isDirectory()) {
         transformDir(entry)
       } else {
         transformFile(entry)
       }
     })
-    function transformFile (filename) {
-      const filepath = path.join(outdir, filename)
+
+    function transformFile (entry) {
+      const [filename, filepath] = entry
       const results = babel.transform(
         fs.readFileSync(filename, 'utf8'),
         Object.assign({}, babelConfig(get('env')), {filename, sourceMaps: true})
@@ -129,10 +132,13 @@ commander
       fs.writeFileSync(filepath, results.code + '\n//# sourceMappingURL=' + path.basename(filepath))
       fs.writeFileSync(`${filepath}.map`, JSON.stringify(results.map))
     }
-    function transformDir (dir) {
-      glob(`${dir}/**/*.js`, (err, files) => {
+
+    function transformDir (entry) {
+      glob(`${entry[0]}/**/*.js`, (err, files) => {
         if (err) console.error(err)
-        files.forEach(transformFile)
+        files.forEach((filename) => {
+          transformFile([filename, `${get('outdir') || ''}${filename.slice(filename.indexOf('/') + 1)}`])
+        })
       })
     }
   })
