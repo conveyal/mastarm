@@ -11,6 +11,7 @@ commander
   .option('-c, --config <path>', 'Path to configuration files.', path.join(process.cwd(), '/configurations/default'))
   .option('-e, --env <environment>', 'Environment to use.')
   .option('-m, --minify', 'Minify built files.')
+  .option('-O, --outdir <dir>', 'Publish directory', '')
   .option('-S, --skip-check-dependencies', '**DEPRECATED**')
 
 commander
@@ -23,7 +24,7 @@ commander
   .action(function (entries, options) {
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
-    const files = util.parseEntries(entries, get)
+    const files = util.parseEntries([...entries, ...(get('entries') || [])], get('outdir'))
     util.assertEntriesExist(files)
     const opts = {
       config,
@@ -67,7 +68,7 @@ commander
     const pushToS3 = require('../lib/push-to-s3')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
-    const files = util.parseEntries(entries, get)
+    const files = util.parseEntries([...entries, ...(get('entries') || [])], get('outdir'))
     util.assertEntriesExist(files)
     Promise.all(files.map(pushToS3({
       cloudfront: get('cloudfront'),
@@ -103,50 +104,22 @@ commander
 commander
   .command('prepublish [entries...]')
   .description('Transpile JavaScript down to ES5 with Babel')
-  .option('-O, --outdir <dir>', 'Publish directory')
   .action(function (entries, options) {
-    const babel = require('babel-core')
-    const fs = require('fs')
-    const glob = require('glob')
-    const mkdirp = require('mkdirp')
-    const babelConfig = require('../lib/babel-config')
+    const prepublish = require('../lib/prepublish')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
-    const files = util.parseEntries(entries, get)
 
-    files.forEach((entry) => {
-      if (fs.statSync(entry[0]).isDirectory()) {
-        transformDir(entry)
-      } else {
-        transformFile(entry)
-      }
+    prepublish({
+      entries: util.parseEntries([...entries, ...(get('entries') || [])], get('outdir')),
+      env: get('env'),
+      outdir: get('outdir')
     })
-
-    function transformFile (entry) {
-      const [filename, filepath] = entry
-      const results = babel.transform(
-        fs.readFileSync(filename, 'utf8'),
-        Object.assign({}, babelConfig(get('env')), {filename, sourceMaps: true})
-      )
-      mkdirp.sync(path.dirname(filepath))
-      fs.writeFileSync(filepath, results.code + '\n//# sourceMappingURL=' + path.basename(filepath))
-      fs.writeFileSync(`${filepath}.map`, JSON.stringify(results.map))
-    }
-
-    function transformDir (entry) {
-      glob(`${entry[0]}/**/*.js`, (err, files) => {
-        if (err) console.error(err)
-        files.forEach((filename) => {
-          transformFile([filename, `${get('outdir') || ''}${filename.slice(filename.indexOf('/') + 1)}`])
-        })
-      })
-    }
   })
 
 commander
   .command('test [patterns...]')
   .description('Run tests using Jest')
-  .option('-u, --update-snapshots', 'Force update of snapshots.  USE WITH CAUTION.')
+  .option('-u, --update-snapshots', 'Force update of snapshots. USE WITH CAUTION.')
   .option('--coverage', 'Run Jest with coverage reporting')
   .option('--no-cache', 'Run Jest without cache (defaults to using cache)')
   .option('--coverage-paths <paths>', 'Extra paths to collect code coverage from')

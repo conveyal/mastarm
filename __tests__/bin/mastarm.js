@@ -50,6 +50,26 @@ describe('mastarm cli', () => {
     })
   })
 
+  describe.skip('prepublish', function () {
+    const buildDir = util.buildDir
+    const mockDir = util.mockDir
+
+    beforeEach((done) => mkdirp(buildDir, done))
+    afterEach((done) => rimraf(buildDir, done))
+
+    it('should prepublish a project', (done) => {
+      exec(`node ${mastarm} prepublish ${mockDir}:${buildDir}`,
+        (err, stdout, stderr) => {
+          expect(err).toBeNull()
+          expect(stdout).toBe('')
+          expect(stderr).toBe('')
+          expect(fs.existsSync(`${buildDir}/index.js`)).toBeTruthy()
+          done()
+        }
+      )
+    })
+  })
+
   it('should run lint on a project', (done) => {
     exec(`node ${mastarm} lint`, (err, stdout, stderr) => {
       expect(err).toBeNull()
