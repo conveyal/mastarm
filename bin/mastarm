@@ -68,7 +68,7 @@ commander
     const pushToS3 = require('../lib/push-to-s3')
     const config = loadConfig(process.cwd(), commander.config, commander.env)
     const get = util.makeGetFn([options, commander, config.settings])
-    const files = util.parseEntries([...entries, ...(get('entries') || [])], get('outdir'))
+    const files = util.parseEntries([...entries, ...(get('entries') || [])])
     util.assertEntriesExist(files)
     Promise.all(files.map(pushToS3({
       cloudfront: get('cloudfront'),

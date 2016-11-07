@@ -50,7 +50,7 @@ describe('mastarm cli', () => {
     })
   })
 
-  describe.skip('prepublish', function () {
+  describe('prepublish', function () {
     const buildDir = util.buildDir
     const mockDir = util.mockDir
 

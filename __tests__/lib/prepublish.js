@@ -41,8 +41,9 @@ describe('prepublish', () => {
 
   it('should transpile entries to a specific outdir', () => {
     const results = prepublish({
-      entries: util.parseEntries([`${mockDir}/index.js`], buildDir),
-      env: 'development'
+      entries: util.parseEntries([`${mockDir}/index.js`]),
+      env: 'development',
+      outdir: buildDir
     })
 
     expect(results.length === 1).toBeTruthy()
