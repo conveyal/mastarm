@@ -73,7 +73,7 @@
     "yamljs": "^0.2.8"
   },
   "devDependencies": {
-    "semantic-release": "^4.3.5"
+    "semantic-release": "^6.3.2"
   },
   "standard": {
     "parser": "babel-eslint"
