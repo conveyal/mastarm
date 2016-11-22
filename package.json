@@ -54,7 +54,7 @@
     "exorcist": "^0.4.0",
     "http-proxy": "^1.14.0",
     "isomorphic-fetch": "^2.2.1",
-    "jest": "^16.0.0",
+    "jest": "^17.0.3",
     "lodash.uniq": "^4.5.0",
     "mime": "^1.3.4",
     "mkdirp": "^0.5.1",
