@@ -68,7 +68,7 @@
     "standard-engine": "^5.0.0",
     "through2": "^2.0.1",
     "uglifyify": "^3.0.2",
-    "uuid": "^2.0.2",
+    "uuid": "^3.0.0",
     "watchify": "^3.7.0",
     "yamljs": "^0.2.8"
   },
