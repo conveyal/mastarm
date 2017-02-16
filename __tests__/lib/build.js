@@ -4,41 +4,40 @@ const build = require('../../lib/build')
 const util = require('../test-utils/util.js')
 
 const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+const TWENTY_SECONDS = 20000
 
 describe('build', () => {
   const mockDir = util.mockDir
 
   beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = TWENTY_SECONDS
   })
   afterEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
   })
 
   describe('development', () => {
-    it('should transform js', (done) => {
-      const results = build({
+    it('should transform js', () => {
+      const [jsResults] = build({
         config: {},
         files: [[`${mockDir}/index.js`]]
       })
 
-      results[0]
+      return jsResults
         .then((buf) => {
-          expect(buf.toString().indexOf('MockTestComponentUniqueName')).to.not.equal(-1)
-          done()
+          expect(buf.toString().includes('MockTestComponentUniqueName')).toBeTruthy()
         })
-        .catch(done)
     })
 
     it('should transform css', async () => {
-      const results = build({
+      const [cssResults] = build({
         config: {},
         files: [[`${mockDir}/index.css`]]
       })
 
-      const result = await results[0]
+      const result = await cssResults
       const css = result.css
-      expect(css.indexOf('criticalClass')).toBeGreaterThan(-1)
+      expect(css.includes('criticalClass')).toBeTruthy()
     })
   })
 
@@ -54,10 +53,10 @@ describe('build', () => {
         minify: true
       })
 
-      const output = await Promise.all(results)
+      const [jsOutput, cssOutput] = await Promise.all(results)
 
-      expect(output[0].toString().indexOf('MockTestComponentUniqueName')).not.toBe(-1)
-      expect(output[1].css.indexOf('criticalClass')).not.toBe(-1)
+      expect(jsOutput.toString().includes('MockTestComponentUniqueName')).toBeTruthy()
+      expect(cssOutput.css.includes('criticalClass')).toBeTruthy()
     })
   })
 })

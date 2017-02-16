@@ -10,7 +10,12 @@
     "flowtype-errors"
   ],
   "rules": {
-    "flowtype-errors/show-errors": 2
+    "flowtype-errors/show-errors": "error",
+    "no-magic-numbers": ["warn", {
+      "detectObjects": true,
+      "ignore": [-1, 0, 1],
+      "ignoreArrayIndexes": true
+    }]
   },
   "settings": {
     "flowtype": {

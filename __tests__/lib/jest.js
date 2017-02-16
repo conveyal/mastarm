@@ -2,6 +2,9 @@
 
 const jestUtils = require('../../lib/jest')
 
+const EXPECTED_ARGUMENT_LENGTH = 8
+const JEST_CONFIG_INDEX = 4
+
 describe('test.js', () => {
   it('generateTestConfig should generate proper config', () => {
     const cfg = jestUtils.generateTestConfig(['these', 'files', 'only'], {
@@ -13,8 +16,8 @@ describe('test.js', () => {
       updateSnapshots: true
     })
     expect(cfg).toBeTruthy()
-    expect(cfg.length).toEqual(8)
-    const jestCfg = JSON.parse(cfg.splice(4, 1))
+    expect(cfg.length).toEqual(EXPECTED_ARGUMENT_LENGTH)
+    const jestCfg = JSON.parse(cfg.splice(JEST_CONFIG_INDEX, 1))
     expect(cfg).toMatchSnapshot()
     expect(jestCfg.transform['.*']).toContain('lib/jest-preprocessor.js')
     delete jestCfg.transform

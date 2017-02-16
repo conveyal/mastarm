@@ -25,7 +25,7 @@ describe('util.js', () => {
   })
 
   it('makeGetFn should find the right value', () => {
-    expect(util.makeGetFn([{ a: 1 }, { a: 2 }])('a')).toEqual(1)
+    expect(util.makeGetFn([{ a: 1 }, { a: 0 }])('a')).toEqual(1)
   })
 
   describe('parseEntries', () => {
@@ -37,8 +37,9 @@ describe('util.js', () => {
     })
 
     it('should return inputted file paths', () => {
+      const NUMBER_OF_ENTRIES = 2
       const result = util.parseEntries([`${mockDir}/index.css:blah`, `${mockDir}/index.js:blah`], get)
-      expect(result.length).toBe(2)
+      expect(result.length).toBe(NUMBER_OF_ENTRIES)
       expect(result).toMatchSnapshot()
     })
   })
