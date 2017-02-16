@@ -15,6 +15,10 @@
       "detectObjects": true,
       "ignore": [-1, 0, 1],
       "ignoreArrayIndexes": true
+    }],
+    "prefer-const": ["warn", {
+      "destructuring": "all",
+      "ignoreReadBeforeAssign": false
     }]
   },
   "settings": {
