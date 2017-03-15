@@ -10,11 +10,12 @@ const util = require('../test-utils/util.js')
 
 const mastarm = path.resolve(__dirname, '../../bin/mastarm')
 
+const TWENTY_SECONDS = 20000
 const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
 
 describe('mastarm cli', () => {
   beforeEach(() => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = TWENTY_SECONDS
   })
   afterEach(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
