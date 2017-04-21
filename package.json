@@ -47,7 +47,7 @@
     "babelify": "^7.3.0",
     "browserify": "^14.3.0",
     "browserify-markdown": "1.0.0",
-    "budo": "^9.4.7",
+    "budo": "^10.0.2",
     "chokidar": "^1.6.1",
     "commander": "^2.9.0",
     "commitizen": "^2.9.6",
