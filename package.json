@@ -67,7 +67,7 @@
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^3.0.1",
     "exorcist": "^0.4.0",
-    "flow-bin": "^0.44.0",
+    "flow-bin": "^0.45.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^19.0.2",
     "lodash.uniq": "^4.5.0",
