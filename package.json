@@ -79,7 +79,7 @@
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^9.1.0",
     "postcss-reporter": "^3.0.0",
-    "postcss-safe-parser": "^2.0.1",
+    "postcss-safe-parser": "^3.0.0",
     "prettier": "^1.1.0",
     "rimraf": "^2.6.1",
     "slack-node": "^0.1.8",
