@@ -14,6 +14,12 @@ Array [
       "another-folder",
     ],
     "coverageDirectory": "coverage",
+    "moduleFileExtensions": Array [
+      "js",
+      "jsx",
+      "json",
+      "yml",
+    ],
     "notify": true,
     "setupFiles": Array [
       "beforeTestsSetup.js",
