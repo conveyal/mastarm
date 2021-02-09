@@ -16,12 +16,16 @@
     "flowtype",
     "import",
     "jest",
-    "jsx-a11y"
+    "jsx-a11y",
+    "react"
   ],
   "rules": {
     "complexity": ["warn", 12],
     "import/order": ["warn", {
       "newlines-between": "always"
+    }],
+    "react/jsx-sort-props": ["warn", {
+      "ignoreCase": true
     }],
     "object-curly-spacing": 0,
     "prefer-const": ["warn", {
