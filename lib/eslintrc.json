@@ -24,13 +24,19 @@
     "import/order": ["warn", {
       "newlines-between": "always"
     }],
-    "react/jsx-sort-props": ["warn", {
+    "react/jsx-sort-props": ["error", {
       "ignoreCase": true
     }],
     "object-curly-spacing": 0,
     "prefer-const": ["warn", {
       "destructuring": "all",
       "ignoreReadBeforeAssign": false
+    }],
+    "sort-keys": ["error", "asc", {
+      "caseSensitive": false
+    }],
+    "sort-vars": ["error", {
+      "ignoreCase": true
     }],
     "flowtype/sort-keys": [
       "error",
