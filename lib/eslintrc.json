@@ -17,7 +17,8 @@
     "import",
     "jest",
     "jsx-a11y",
-    "react"
+    "react",
+    "sort-destructure-keys"
   ],
   "rules": {
     "complexity": ["warn", 12],
@@ -31,6 +32,9 @@
     "prefer-const": ["warn", {
       "destructuring": "all",
       "ignoreReadBeforeAssign": false
+    }],
+    "sort-destructure-keys/sort-destructure-keys": ["error", {
+      "caseSensitive": false
     }],
     "sort-keys": ["error", "asc", {
       "caseSensitive": false
